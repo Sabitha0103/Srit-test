@@ -12,6 +12,7 @@ const locations = [
     image: 'https://images.unsplash.com/photo-1562774053-701939374585?w=800&q=80',
     description: 'Modern classrooms with smart boards and AC facilities',
     virtualTour: '#',
+    altText: 'Modern academic building with smart classrooms and advanced teaching facilities',
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ const locations = [
     image: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=800&q=80',
     description: '50,000+ books, digital library, and reading zones',
     virtualTour: '#',
+    altText: 'Spacious library interior with reading areas and thousands of books',
   },
   {
     id: 3,
@@ -26,6 +28,7 @@ const locations = [
     image: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=800&q=80',
     description: 'State-of-the-art laboratories with latest equipment',
     virtualTour: '#',
+    altText: 'Modern research laboratory with advanced scientific equipment',
   },
   {
     id: 4,
@@ -33,6 +36,7 @@ const locations = [
     image: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&q=80',
     description: 'Cricket, football, basketball, and indoor games',
     virtualTour: '#',
+    altText: 'Sports facilities including outdoor fields and indoor courts',
   },
   {
     id: 5,
@@ -40,6 +44,7 @@ const locations = [
     image: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=800&q=80',
     description: 'Comfortable accommodation with modern amenities',
     virtualTour: '#',
+    altText: 'Comfortable student hostel room with modern furnishings',
   },
   {
     id: 6,
@@ -47,6 +52,7 @@ const locations = [
     image: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800&q=80',
     description: 'Hygienic food court with multiple cuisine options',
     virtualTour: '#',
+    altText: 'Clean and modern campus cafeteria with dining areas',
   },
 ];
 
@@ -83,7 +89,7 @@ const ExploreCampus: React.FC = () => {
               >
                 <img 
                   src={selectedLocation.image} 
-                  alt={selectedLocation.name}
+                  alt={selectedLocation.altText}
                   className="w-full h-[500px] object-cover"
                 />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-8">
@@ -93,7 +99,10 @@ const ExploreCampus: React.FC = () => {
                   <p className="text-white/90 mb-4">
                     {selectedLocation.description}
                   </p>
-                  <button className="bg-orange-500 text-white px-6 py-3 rounded-xl hover:bg-orange-600 transition flex items-center gap-2">
+                  <button 
+                    className="bg-orange-500 text-white px-6 py-3 rounded-xl hover:bg-orange-600 transition flex items-center gap-2"
+                    onClick={() => alert('360° Virtual Tour coming soon! Stay tuned for immersive campus experience.')}
+                  >
                     <Video size={20} />
                     Start 360° Tour
                   </button>

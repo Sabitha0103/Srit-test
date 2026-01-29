@@ -11,7 +11,6 @@ const ApplyNow: React.FC = () => {
     phone: '',
     course: '',
     qualification: '',
-    state: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -41,10 +40,11 @@ const ApplyNow: React.FC = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="fullName" className="block text-sm font-semibold text-gray-700 mb-2">
                   Full Name *
                 </label>
                 <input
+                  id="fullName"
                   type="text"
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:outline-none transition"
@@ -56,10 +56,11 @@ const ApplyNow: React.FC = () => {
 
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 mb-2">
                     Email Address *
                   </label>
                   <input
+                    id="email"
                     type="email"
                     required
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:outline-none transition"
@@ -70,12 +71,14 @@ const ApplyNow: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label htmlFor="phone" className="block text-sm font-semibold text-gray-700 mb-2">
                     Phone Number *
                   </label>
                   <input
+                    id="phone"
                     type="tel"
                     required
+                    pattern="[0-9]{10}"
                     className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:outline-none transition"
                     placeholder="+91 XXXXX XXXXX"
                     value={formData.phone}
@@ -85,10 +88,11 @@ const ApplyNow: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="course" className="block text-sm font-semibold text-gray-700 mb-2">
                   Course Interested In *
                 </label>
                 <select
+                  id="course"
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:outline-none transition"
                   value={formData.course}
@@ -104,10 +108,11 @@ const ApplyNow: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label htmlFor="qualification" className="block text-sm font-semibold text-gray-700 mb-2">
                   Highest Qualification *
                 </label>
                 <select
+                  id="qualification"
                   required
                   className="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-orange-500 focus:outline-none transition"
                   value={formData.qualification}

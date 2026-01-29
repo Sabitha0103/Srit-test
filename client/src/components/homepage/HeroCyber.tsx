@@ -47,7 +47,7 @@ export const HeroCyber: React.FC = () => {
                 'radial-gradient(circle at 0% 100%, rgba(255,107,53,0.25) 0%, transparent 50%), radial-gradient(circle at 100% 0%, rgba(147,51,234,0.2) 0%, transparent 50%)',
               ]
             }}
-            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
           />
           
           {/* Overlay gradient for text readability */}
