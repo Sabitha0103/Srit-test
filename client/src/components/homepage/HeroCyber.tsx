@@ -7,7 +7,6 @@ import {
   Logo3D, 
   HexagonalGrid, 
   GeometricShapes3D, 
-  ParticleBackground, 
   ScrollIndicator,
   StaggerContainer,
   StaggerItem,
@@ -15,7 +14,7 @@ import {
 } from '@/components/animations';
 import { CyberFallbackBackground } from '@/components/animations/CyberFallbackBackground';
 import { useIsMobile } from '@/hooks/useIsMobile';
-import { PARTICLE_COUNT, GRID_COUNT } from '@/components/animations/constants3D';
+import { GRID_COUNT } from '@/components/animations/constants3D';
 
 // Quick access cards
 const quickAccessCards = [
@@ -28,27 +27,41 @@ const quickAccessCards = [
 export const HeroCyber: React.FC = () => {
   const isMobile = useIsMobile();
 
-  // Determine particle and grid counts based on device
-  const particleCount = isMobile ? PARTICLE_COUNT.HERO_CYBER_MOBILE : PARTICLE_COUNT.HERO_CYBER_DESKTOP;
+  // Determine grid count based on device
   const gridCount = isMobile ? GRID_COUNT.HERO_CYBER_MOBILE : GRID_COUNT.HERO_CYBER_DESKTOP;
 
   return (
     <div className="w-full">
       {/* HERO SECTION - DSU Cyber27 Style */}
       <div className="relative w-full h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950">
+        {/* Video Background with Animated Gradient Fallback */}
+        <div className="absolute inset-0 overflow-hidden">
+          {/* Animated Gradient Mesh Background */}
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              background: [
+                'radial-gradient(circle at 0% 0%, rgba(255,107,53,0.25) 0%, transparent 50%), radial-gradient(circle at 100% 100%, rgba(147,51,234,0.2) 0%, transparent 50%)',
+                'radial-gradient(circle at 100% 0%, rgba(147,51,234,0.25) 0%, transparent 50%), radial-gradient(circle at 0% 100%, rgba(59,130,246,0.2) 0%, transparent 50%)',
+                'radial-gradient(circle at 100% 100%, rgba(59,130,246,0.25) 0%, transparent 50%), radial-gradient(circle at 0% 0%, rgba(255,107,53,0.2) 0%, transparent 50%)',
+                'radial-gradient(circle at 0% 100%, rgba(255,107,53,0.25) 0%, transparent 50%), radial-gradient(circle at 100% 0%, rgba(147,51,234,0.2) 0%, transparent 50%)',
+              ]
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          />
+          
+          {/* Overlay gradient for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-slate-950/70 via-slate-950/60 to-slate-950/90" />
+        </div>
+
         {/* Hexagonal Grid Background */}
         <Suspense fallback={<div className="absolute inset-0"><CyberFallbackBackground /></div>}>
-          <HexagonalGrid className="opacity-30" gridCount={gridCount} isMobile={isMobile} />
+          <HexagonalGrid className="opacity-20" gridCount={gridCount} isMobile={isMobile} />
         </Suspense>
 
         {/* 3D Geometric Shapes */}
         <Suspense fallback={<div className="absolute inset-0"><CyberFallbackBackground /></div>}>
-          <GeometricShapes3D className="opacity-40" isMobile={isMobile} />
-        </Suspense>
-
-        {/* 3D Particle Background */}
-        <Suspense fallback={<div className="absolute inset-0"><CyberFallbackBackground /></div>}>
-          <ParticleBackground className="opacity-50" particleCount={particleCount} isMobile={isMobile} />
+          <GeometricShapes3D className="opacity-30" isMobile={isMobile} />
         </Suspense>
 
         {/* Gradient Orbs for Lighting */}
@@ -137,7 +150,7 @@ export const HeroCyber: React.FC = () => {
   className="flex flex-wrap gap-6 justify-center"
 >
   {/* Apply Now */}
-  <Link to="/admissions">
+  <Link to="/apply-now">
     <motion.button
       whileHover={{ 
         scale: 1.05, 
@@ -153,7 +166,7 @@ export const HeroCyber: React.FC = () => {
   </Link>
 
   {/* Explore Campus */}
-  <Link to="/about">
+  <Link to="/explore-campus">
     <motion.button
       whileHover={{ 
         scale: 1.05, 

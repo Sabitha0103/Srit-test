@@ -21,7 +21,7 @@ const About = lazy(() => import('@/components/homepage/About').then(m => ({ defa
 const DepartmentShowcase = lazy(() => import('@/components/homepage/DepartmentShowcase').then(m => ({ default: m.DepartmentShowcase })));
 const Notifications = lazy(() => import('@/components/homepage/Notifications').then(m => ({ default: m.Notifications })));
 const EventSlider = lazy(() => import('@/components/homepage/EventSlider').then(m => ({ default: m.EventSlider })));
-const VirtualTour = lazy(() => import('@/components/homepage/VirtualTour').then(m => ({ default: m.VirtualTour })));
+
 const Testimonials = lazy(() => import('@/components/homepage/Testimonials').then(m => ({ default: m.Testimonials })));
 const QuickLinks = lazy(() => import('@/components/homepage/QuickLinks').then(m => ({ default: m.QuickLinks })));
 const Facilities = lazy(() => import('@/components/homepage/Facilities').then(m => ({ default: m.Facilities })));
@@ -71,9 +71,6 @@ const HomePage: React.FC = () => {
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
           <EventSlider />
-        </Suspense>
-        <Suspense fallback={<SectionLoader />}>
-          <VirtualTour />
         </Suspense>
         <CampusMap />
         <AchievementWall />
