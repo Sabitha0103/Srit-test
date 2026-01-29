@@ -4,14 +4,37 @@ import { Accessibility, ZoomIn, ZoomOut, Contrast, Volume2, Keyboard, X } from '
 
 export const AccessibilityToolbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [fontSize, setFontSize] = useState(100);
-  const [highContrast, setHighContrast] = useState(false);
+  const [fontSize, setFontSize] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('accessibilityFontSize');
+      return saved ? parseInt(saved) : 100;
+    }
+    return 100;
+  });
+  const [highContrast, setHighContrast] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const saved = localStorage.getItem('accessibilityHighContrast');
+      return saved ? JSON.parse(saved) : false;
+    }
+    return false;
+  });
+
+  // Apply settings on mount
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      document.documentElement.style.fontSize = `${fontSize}%`;
+      if (highContrast) {
+        document.documentElement.classList.add('high-contrast');
+      }
+    }
+  }, []);
 
   const increaseFontSize = () => {
     if (fontSize < 150) {
       const newSize = fontSize + 10;
       setFontSize(newSize);
       document.documentElement.style.fontSize = `${newSize}%`;
+      localStorage.setItem('accessibilityFontSize', newSize.toString());
     }
   };
 
@@ -20,12 +43,15 @@ export const AccessibilityToolbar: React.FC = () => {
       const newSize = fontSize - 10;
       setFontSize(newSize);
       document.documentElement.style.fontSize = `${newSize}%`;
+      localStorage.setItem('accessibilityFontSize', newSize.toString());
     }
   };
 
   const toggleHighContrast = () => {
-    setHighContrast(!highContrast);
-    if (!highContrast) {
+    const newValue = !highContrast;
+    setHighContrast(newValue);
+    localStorage.setItem('accessibilityHighContrast', JSON.stringify(newValue));
+    if (newValue) {
       document.documentElement.classList.add('high-contrast');
     } else {
       document.documentElement.classList.remove('high-contrast');
@@ -77,12 +103,12 @@ export const AccessibilityToolbar: React.FC = () => {
 
   return (
     <>
-      {/* Toggle Button */}
+      {/* Toggle Button - Positioned to avoid chatbot overlap */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="fixed right-6 top-1/2 -translate-y-1/2 z-50 p-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-full shadow-2xl hover:shadow-orange-500/50 transition-all duration-300"
+        className="fixed left-6 top-1/2 -translate-y-1/2 z-50 p-4 bg-gradient-to-r from-orange-500 to-purple-500 text-white rounded-full shadow-2xl hover:shadow-orange-500/50 transition-all duration-300"
         aria-label="Toggle accessibility toolbar"
       >
         <motion.div
@@ -111,11 +137,11 @@ export const AccessibilityToolbar: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ x: 400, opacity: 0 }}
+            initial={{ x: -400, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}
-            exit={{ x: 400, opacity: 0 }}
+            exit={{ x: -400, opacity: 0 }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-            className="fixed right-24 top-1/2 -translate-y-1/2 z-50 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 p-6 w-80"
+            className="fixed left-24 top-1/2 -translate-y-1/2 z-50 bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 p-6 w-80"
           >
             {/* Header */}
             <div className="mb-6">
@@ -183,6 +209,8 @@ export const AccessibilityToolbar: React.FC = () => {
                 setHighContrast(false);
                 document.documentElement.style.fontSize = '100%';
                 document.documentElement.classList.remove('high-contrast');
+                localStorage.setItem('accessibilityFontSize', '100');
+                localStorage.setItem('accessibilityHighContrast', 'false');
               }}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}

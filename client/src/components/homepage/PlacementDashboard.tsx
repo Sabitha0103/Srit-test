@@ -15,20 +15,28 @@ const CountUp: React.FC<{ end: number; duration?: number; suffix?: string }> = (
   useEffect(() => {
     if (!isInView) return;
     
+    let animationFrameId: number;
     let startTime: number;
+    
     const animate = (currentTime: number) => {
       if (!startTime) startTime = currentTime;
       const progress = (currentTime - startTime) / (duration * 1000);
       
       if (progress < 1) {
         setCount(Math.floor(end * progress));
-        requestAnimationFrame(animate);
+        animationFrameId = requestAnimationFrame(animate);
       } else {
         setCount(end);
       }
     };
     
-    requestAnimationFrame(animate);
+    animationFrameId = requestAnimationFrame(animate);
+    
+    return () => {
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+      }
+    };
   }, [isInView, end, duration]);
 
   return <span ref={ref}>{count}{suffix}</span>;
@@ -101,7 +109,7 @@ export const PlacementDashboard: React.FC = () => {
             className="inline-flex items-center gap-2 bg-gradient-to-r from-orange-500 to-purple-500 text-white px-6 py-2 rounded-full mb-4 shadow-lg"
           >
             <Briefcase className="w-5 h-5" />
-            <span className="font-semibold">Live Placements 2024</span>
+            <span className="font-semibold">Live Placements {new Date().getFullYear()}</span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
             Placement <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-purple-500">Statistics</span>

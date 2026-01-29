@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { X, Send, MessageCircle, Minimize2 } from 'lucide-react';
 
 interface Message {

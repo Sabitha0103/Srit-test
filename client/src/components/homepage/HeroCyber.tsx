@@ -116,7 +116,7 @@ export const HeroCyber: React.FC = () => {
     sequence={[
       'Empowering Innovation',
       2000,
-      'Shaping Tomorrow\'s Leaders',
+      'Shaping Future Engineers',
       2000,
       'Excellence in Engineering Education',
       2000,
