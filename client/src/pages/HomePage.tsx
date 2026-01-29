@@ -2,6 +2,10 @@ import React, { useEffect, lazy, Suspense } from 'react';
 import { Header } from '@/components/homepage/Header';
 import { HeroCyber } from '@/components/homepage/HeroCyber';
 import { Statistics } from '@/components/homepage/Statistics';
+import { PlacementDashboard } from '@/components/homepage/PlacementDashboard';
+import { AlumniCarousel } from '@/components/homepage/AlumniCarousel';
+import { AchievementWall } from '@/components/homepage/AchievementWall';
+import { AdmissionTracker } from '@/components/homepage/AdmissionTracker';
 import { OrangeBorder } from '@/components/common/OrangeBorder';
 import { MouseFollowEffect } from '@/components/animations';
 import { useIsMobile } from '@/hooks/useIsMobile';
@@ -49,12 +53,14 @@ const HomePage: React.FC = () => {
       <main className="flex-grow">
         <HeroCyber />
         <Statistics />
+        <PlacementDashboard />
         <Suspense fallback={<SectionLoader />}>
           <About />
         </Suspense>
         <Suspense fallback={<SectionLoader />}>
           <DepartmentShowcase />
         </Suspense>
+        <AlumniCarousel />
         <Suspense fallback={<SectionLoader />}>
           <QuickLinks />
         </Suspense>
@@ -64,9 +70,11 @@ const HomePage: React.FC = () => {
         <Suspense fallback={<SectionLoader />}>
           <VirtualTour />
         </Suspense>
+        <AchievementWall />
         <Suspense fallback={<SectionLoader />}>
           <Testimonials />
         </Suspense>
+        <AdmissionTracker />
         <Suspense fallback={<SectionLoader />}>
           <Notifications />
         </Suspense>

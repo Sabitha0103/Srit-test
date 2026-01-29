@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { BookOpen, GraduationCap, Coins, FileText } from 'lucide-react';
+import { TypeAnimation } from 'react-type-animation';
 import { 
   Logo3D, 
   HexagonalGrid, 
@@ -104,15 +105,28 @@ export const HeroCyber: React.FC = () => {
             INSTITUTE OF TECHNOLOGY
           </motion.h2>
 
-          {/* Subtitle */}
-<motion.p
+          {/* Subtitle with Typing Animation */}
+<motion.div
   initial={{ opacity: 0, filter: 'blur(10px)' }}
   animate={{ opacity: 1, filter: 'blur(0px)' }}
   transition={{ delay: 1.2, duration: 1, ease: [0.4, 0, 0.2, 1] }}
   className="text-base md:text-lg lg:text-xl text-gray-300 text-center max-w-4xl mb-12 px-4"
 >
-  Empowering Innovation • Shaping Tomorrow's Leaders
-</motion.p>
+  <TypeAnimation
+    sequence={[
+      'Empowering Innovation',
+      2000,
+      'Shaping Tomorrow\'s Leaders',
+      2000,
+      'Excellence in Engineering Education',
+      2000,
+    ]}
+    wrapper="span"
+    speed={50}
+    repeat={Infinity}
+    className="inline-block"
+  />
+</motion.div>
 
 
         {/* CTA Buttons */}
